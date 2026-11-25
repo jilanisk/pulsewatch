@@ -1,0 +1,26 @@
+services:
+  pulsewatch:
+    build: .
+    container_name: pulsewatch
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATA_DIR: /app/data
+      CHECK_INTERVAL: ${CHECK_INTERVAL:-60000}
+      CHECK_CONCURRENCY: ${CHECK_CONCURRENCY:-10}
+      CHECK_TIMEOUT: ${CHECK_TIMEOUT:-10000}
+    volumes:
+      - pulsewatch_data:/app/data
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/api/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+volumes:
+  pulsewatch_data:

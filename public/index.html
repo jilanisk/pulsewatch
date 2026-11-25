@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090d18">
+  <title>PulseWatch — Website Monitoring</title>
+  <style>
+    :root {
+      --bg: #090d18;
+      --panel: #111827;
+      --border: #263247;
+      --muted: #94a3b8;
+      --white: #f8fafc;
+      --green: #22c55e;
+      --red: #f87171;
+      --blue: #818cf8;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--white);
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+    }
+
+    button,
+    input {
+      font: inherit
+    }
+
+    button {
+      cursor: pointer
+    }
+
+    .layout {
+      max-width: 1200px;
+      margin: auto;
+      padding: 30px 22px
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      background: #4f46e5;
+      font-size: 23px;
+      font-weight: 800;
+    }
+
+    h1 {
+      font-size: 21px;
+      margin: 0
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 5px
+    }
+
+    .pill {
+      background: #102b20;
+      color: #4ade80;
+      padding: 8px 12px;
+      border-radius: 30px;
+      font-size: 12px;
+    }
+
+    .welcome {
+      margin-bottom: 26px
+    }
+
+    .welcome h2 {
+      font-size: 29px;
+      margin: 0 0 8px
+    }
+
+    .welcome p {
+      color: var(--muted);
+      margin: 0
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 25px;
+    }
+
+    .card,
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 20px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--muted)
+    }
+
+    .stat-number {
+      font-size: 29px;
+      font-weight: 750;
+      margin: 12px 0 5px
+    }
+
+    .stat-note {
+      font-size: 12px;
+      color: var(--muted)
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+
+    .toolbar h3 {
+      margin: 0;
+      font-size: 18px
+    }
+
+    .primary {
+      border: 0;
+      border-radius: 9px;
+      padding: 11px 16px;
+      background: #6366f1;
+      color: white;
+      font-weight: 650;
+    }
+
+    .primary:hover {
+      background: #4f46e5
+    }
+
+    .secondary {
+      border: 1px solid var(--border);
+      background: #172033;
+      color: white;
+      border-radius: 8px;
+      padding: 8px 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 16px 12px;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    th {
+      color: var(--muted);
+      font-weight: 500
+    }
+
+    td a {
+      color: #a5b4fc;
+      text-decoration: none;
+      overflow-wrap: anywhere
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border-radius: 30px;
+      padding: 6px 10px;
+      font-size: 12px;
+    }
+
+    .status:before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .up {
+      background: #123020;
+      color: #4ade80
+    }
+
+    .down {
+      background: #391d27;
+      color: #fca5a5
+    }
+
+    .pending {
+      background: #292c39;
+      color: #cbd5e1
+    }
+
+    .empty {
+      text-align: center;
+      padding: 50px 15px;
+      color: var(--muted)
+    }
+
+    .empty strong {
+      display: block;
+      color: white;
+      font-size: 17px;
+      margin-bottom: 8px
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #000b;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 5;
+    }
+
+    .modal.open {
+      display: flex
+    }
+
+    .dialog {
+      background: #151e30;
+      border: 1px solid var(--border);
+      padding: 25px;
+      border-radius: 17px;
+      width: 100%;
+      max-width: 440px;
+    }
+
+    .dialog h3 {
+      margin: 0 0 20px
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      margin: 15px 0 7px;
+      color: #cbd5e1
+    }
+
+    input {
+      width: 100%;
+      background: #0b1220;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 12px;
+      color: white;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--blue)
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px
+    }
+
+    .actions button {
+      flex: 1
+    }
+
+    .error {
+      color: #fca5a5;
+      font-size: 13px;
+      margin-top: 12px
+    }
+
+    .incidents {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 14px
+    }
+
+    .incident {
+      width: 7px;
+      height: 24px;
+      border-radius: 4px;
+      background: #263247;
+    }
+
+    .incident.good {
+      background: #22c55e
+    }
+
+    .incident.bad {
+      background: #ef4444
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      margin: 30px 0 10px;
+    }
+
+    @media(max-width:750px) {
+      .stats {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .table-wrap {
+        overflow-x: auto
+      }
+
+      table {
+        min-width: 650px
+      }
+
+      .welcome h2 {
+        font-size: 24px
+      }
+    }
+
+    @media(max-width:420px) {
+      .layout {
+        padding: 20px 14px
+      }
+
+      .stats {
+        gap: 9px
+      }
+
+      .card {
+        padding: 14px
+      }
+
+      .stat-number {
+        font-size: 24px
+      }
+    }
+  </style>
+  <style>
+    .login-screen {
+      position: fixed;
+      inset: 0;
+      background: #090d18;
+      z-index: 20;
+      display: none;
+      place-items: center;
+      padding: 20px
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 390px;
+      background: #111827;
+      border: 1px solid #263247;
+      border-radius: 18px;
+      padding: 28px
+    }
+
+    .login-card h2 {
+      margin: 0 0 8px
+    }
+
+    .login-card p {
+      color: #94a3b8;
+      font-size: 13px;
+      margin: 0 0 22px
+    }
+
+    .login-card button {
+      width: 100%;
+      margin-top: 18px
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center
+    }
+
+    .badge {
+      font-size: 11px;
+      color: #94a3b8;
+      background: #1e293b;
+      border-radius: 20px;
+      padding: 5px 9px
+    }
+
+    td:last-child {
+      white-space: nowrap;
+    }
+
+    td:last-child button {
+      margin: 2px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="layout">
+    <header>
+      <div class="brand">
+        <div class="logo">P</div>
+        <div>
+          <h1>PulseWatch</h1>
+          <div class="subtitle">Website monitoring platform</div>
+        </div>
+      </div>
+      <div class="top-actions"><span class="pill">● Monitoring system</span><button class="secondary"
+          onclick="logout()">Sign out</button></div>
+    </header>
+
+    <section class="welcome">
+      <h2>Your monitoring dashboard</h2>
+      <p>Keep track of your websites and catch downtime early.</p>
+    </section>
+
+    <section class="stats">
+      <div class="card">
+        <div class="stat-label">Total websites</div>
+        <div class="stat-number" id="total">0</div>
+        <div class="stat-note">Monitored websites</div>
+      </div>
+      <div class="card">
+        <div class="stat-label">Online</div>
+        <div class="stat-number" id="online" style="color:#4ade80">0</div>
+        <div class="stat-note">Currently responding</div>
+      </div>
+      <div class="card">
+        <div class="stat-label">Offline</div>
+        <div class="stat-number" id="offline" style="color:#f87171">0</div>
+        <div class="stat-note">Unavailable websites</div>
+      </div>
+      <div class="card">
+        <div class="stat-label">Average response</div>
+        <div class="stat-number" id="average">—</div>
+        <div class="stat-note">Milliseconds</div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="toolbar">
+        <h3>Monitored websites</h3>
+        <button class="primary" onclick="showModal()">+ Add website</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>WEBSITE</th>
+              <th>STATUS</th>
+              <th>RESPONSE</th>
+              <th>LAST CHECK</th>
+              <th>ACTIONS</th>
+            </tr>
+          </thead>
+          <tbody id="sites"></tbody>
+        </table>
+      </div>
+      <div id="empty" class="empty">
+        <strong>No websites yet</strong>
+        Add your first website to start monitoring.
+      </div>
+    </section>
+
+    <section class="panel" style="margin-top:20px">
+      <h3 style="margin-top:0">Monitoring history</h3>
+      <p class="subtitle">Recent check results across your websites</p>
+      <div id="history"></div>
+    </section>
+
+    <section class="panel" style="margin-top:20px">
+      <div class="toolbar">
+        <h3>Recent incidents</h3><span class="badge">Last 200</span>
+      </div>
+      <div id="incidentList" class="subtitle">Loading incidents…</div>
+    </section>
+    <div class="footer">
+      PulseWatch · Open-source website monitoring · MIT License
+    </div>
+  </div>
+
+  <div class="login-screen" id="loginScreen">
+    <div class="login-card">
+      <div class="brand">
+        <div class="logo">P</div>
+        <div>
+          <h1>PulseWatch</h1>
+          <div class="subtitle">Administrator sign in</div>
+        </div>
+      </div>
+      <h2 style="margin-top:25px">Welcome back</h2>
+      <p>Sign in to manage your website monitors.</p>
+      <form id="loginForm"><label for="loginUser">Username</label><input id="loginUser" autocomplete="username" required
+          value="admin">
+        <label for="loginPass">Password</label><input id="loginPass" type="password" autocomplete="current-password"
+          required>
+        <div class="error" id="loginError"></div><button class="primary" id="loginButton">Sign in</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" id="modal">
+    <div class="dialog">
+      <h3 id="modalTitle">Add a website</h3>
+
+      <form id="addForm">
+        <label for="name">Website name</label>
+        <input id="name" maxlength="80" required placeholder="My Business Website">
+
+        <label for="url">Website URL</label>
+        <input id="url" type="url" required placeholder="https://example.com">
+
+        <div class="error" id="error"></div>
+
+        <div class="actions">
+          <button type="button" class="secondary" onclick="hideModal()">Cancel</button>
+
+          <button class="primary" type="submit" id="submit">Add website</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- 
+  <div class="modal" id="modal">
+    <div class="dialog">
+      <h3>Add a website</h3>
+      <form id="addForm">
+        <label for="name">Website name</label>
+        <input id="name" maxlength="80" required placeholder="My Business Website">
+        <label for="url">Website URL</label>
+        <input id="url" type="url" required placeholder="https://example.com">
+        <div class="error" id="error"></div>
+        <div class="actions">
+          <button type="button" class="secondary" onclick="hideModal()">Cancel</button>
+          <button class="primary" type="submit" id="submit">Add website</button>
+        </div>
+      </form>
+    </div>
+  </div> -->
+  <script>
+    const $ = (id) => document.getElementById(id);
+    let lastRenderKey = "";
+    async function api(path, options = {}) {
+      const response = await fetch("/api" + path, {
+        ...options,
+        credentials: "same-origin",
+        headers: { "Content-Type": "application/json", ...(options.headers || {}) },
+      });
+      const data = await response.json().catch(() => ({}));
+      if (response.status === 401) {
+        showLogin();
+        throw new Error("Please sign in.");
+      }
+      if (!response.ok) throw new Error(data.error || "Request failed");
+      return data;
+    }
+    function showLogin() {
+      $("loginScreen").style.display = "grid";
+    }
+    function hideLogin() {
+      $("loginScreen").style.display = "none";
+    }
+    $("loginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      $("loginButton").disabled = true;
+      $("loginError").textContent = "Signing in…";
+      try {
+        await api("/auth/login", {
+          method: "POST",
+          body: JSON.stringify({ username: $("loginUser").value, password: $("loginPass").value }),
+        });
+        hideLogin();
+        lastRenderKey = "";
+        await refresh();
+      } catch (err) {
+        $("loginError").textContent = err.message;
+      } finally {
+        $("loginButton").disabled = false;
+      }
+    });
+    async function logout() {
+      try {
+        await api("/auth/logout", { method: "POST" });
+      } finally {
+        showLogin();
+      }
+    }
+    function timeAgo(value) {
+      if (!value) return "Never";
+      const sec = Math.max(0, Math.floor((Date.now() - new Date(value)) / 1000));
+      if (sec < 60) return sec + "s ago";
+      if (sec < 3600) return Math.floor(sec / 60) + "m ago";
+      if (sec < 86400) return Math.floor(sec / 3600) + "h ago";
+      return Math.floor(sec / 86400) + "d ago";
+    }
+    function uptime(site) {
+      const h = site.history || [];
+      if (!h.length) return "—";
+      return ((h.filter((x) => x.status === "up").length / h.length) * 100).toFixed(1) + "%";
+    }
+    function escapeHTML(v) {
+      return String(v).replace(
+        /[&<>"']/g,
+        (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]
+      );
+    }
+    async function refresh() {
+      try {
+        const [sites, overview, incidents] = await Promise.all([
+          api("/sites"),
+          api("/overview"),
+          api("/incidents"),
+        ]);
+        $("total").textContent = overview.total;
+        $("online").textContent = overview.up;
+        $("offline").textContent = overview.down;
+        $("average").textContent =
+          overview.averageResponseTime === null ? "—" : overview.averageResponseTime + "ms";
+        $("empty").style.display = sites.length ? "none" : "block";
+        const key = JSON.stringify([sites, incidents]);
+        if (key !== lastRenderKey) {
+          lastRenderKey = key;
+          $("sites").innerHTML = sites
+            .map(
+              (s) =>
+                `<tr><td><strong>${escapeHTML(s.name)}</strong><br><a href="${escapeHTML(s.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(s.url)}</a><div class="subtitle">Recent uptime: ${uptime(s)} ${s.enabled ? "" : " · Paused"}</div></td><td><span class="status ${s.status}">${escapeHTML(s.status.toUpperCase())}</span></td><td>${s.responseTime === null ? "—" : s.responseTime + " ms"}</td><td>${timeAgo(s.lastChecked)}</td>
+                <td><button class="secondary" onclick="editSite('${s.id}')">Edit</button><button class="secondary" onclick="checkSite('${s.id}')">Check</button><button class="secondary" onclick="toggleSite('${s.id}',${!s.enabled})">    ${s.enabled ? "Pause" : "Resume"}</button><button class="secondary" onclick="removeSite('${s.id}')">Delete</button> </td></tr>`).join("");
+          $("history").innerHTML = sites.length
+            ? sites
+              .map(
+                (s) =>
+                  `<div style="padding:12px 0;border-bottom:1px solid #263247"><strong>${escapeHTML(s.name)}</strong><div class="incidents">${(
+                    s.history || []
+                  )
+                    .slice(-30)
+                    .map(
+                      (h) =>
+                        `<span class="incident ${h.status === "up" ? "good" : "bad"}" title="${escapeHTML(h.time)}: ${h.status}"></span>`
+                    )
+                    .join(
+                      ""
+                    )}</div><div class="subtitle">${s.incidents?.length || 0} incidents recorded</div></div>`
+              )
+              .join("")
+            : "No history available yet.";
+          $("incidentList").innerHTML = incidents.length
+            ? incidents
+              .slice(0, 12)
+              .map(
+                (i) =>
+                  `<div style="padding:10px 0;border-bottom:1px solid #263247"><strong>${escapeHTML(i.name)}</strong> <span class="status ${i.resolved_at ? "up" : "down"}">${i.resolved_at ? "RESOLVED" : "ONGOING"}</span><div class="subtitle">Started ${timeAgo(i.started_at)} · ${i.resolved_at ? "Resolved " + timeAgo(i.resolved_at) : escapeHTML(i.cause || "Unavailable")}</div></div>`
+              )
+              .join("")
+            : "No incidents recorded.";
+        }
+      } catch (e) {
+        if (!String(e.message).includes("sign in")) console.error(e);
+      }
+    }
+
+    let editingSiteId = null;
+
+    // Open modal for adding a website.
+    function showModal() {
+      editingSiteId = null;
+
+      $("modalTitle").textContent = "Add a website";
+      $("submit").textContent = "Add website";
+
+      $("addForm").reset();
+      $("error").textContent = "";
+
+      $("modal").classList.add("open");
+      $("name").focus();
+    }
+
+    // Open modal for editing an existing website.
+    async function editSite(id) {
+      try {
+        // Fetch the current website data from the API.
+        const sites = await api("/sites");
+        const site = sites.find(s => String(s.id) === String(id));
+
+        if (!site) {
+          alert("Website not found.");
+          return;
+        }
+
+        editingSiteId = id;
+
+        $("modalTitle").textContent = "Edit website";
+        $("submit").textContent = "Save changes";
+
+        $("name").value = site.name;
+        $("url").value = site.url;
+
+        $("error").textContent = "";
+        $("modal").classList.add("open");
+
+        $("name").focus();
+
+      } catch (err) {
+        alert(err.message);
+      }
+    }
+
+    function hideModal() {
+      $("modal").classList.remove("open");
+      editingSiteId = null;
+    }
+
+    // Add or update website.
+    $("addForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const isEditing = editingSiteId !== null;
+
+      const payload = {
+        name: $("name").value.trim(),
+        url: $("url").value.trim()
+      };
+
+      $("submit").disabled = true;
+      $("submit").textContent = isEditing ? "Saving..." : "Adding...";
+      $("error").textContent = "";
+
+      try {
+        if (isEditing) {
+          await api("/sites/" + encodeURIComponent(editingSiteId), {
+            method: "PATCH",
+            body: JSON.stringify(payload)
+          });
+        } else {
+          await api("/sites", {
+            method: "POST",
+            body: JSON.stringify(payload)
+          });
+        }
+
+        $("addForm").reset();
+        hideModal();
+
+        lastRenderKey = "";
+        await refresh();
+
+      } catch (err) {
+        $("error").textContent = err.message;
+      } finally {
+        $("submit").disabled = false;
+        $("submit").textContent = editingSiteId
+          ? "Save changes"
+          : "Add website";
+      }
+    });
+
+    // function showModal() {
+    //   $("modal").classList.add("open");
+    //   $("error").textContent = "";
+    //   $("name").focus();
+    // }
+    // function hideModal() {
+    //   $("modal").classList.remove("open");
+    // }
+    // $("addForm").addEventListener("submit", async (e) => {
+    //   e.preventDefault();
+    //   $("submit").disabled = true;
+    //   $("error").textContent = "Adding website…";
+    //   try {
+    //     await api("/sites", {
+    //       method: "POST",
+    //       body: JSON.stringify({ name: $("name").value, url: $("url").value }),
+    //     });
+    //     $("addForm").reset();
+    //     hideModal();
+    //     lastRenderKey = "";
+    //     await refresh();
+    //   } catch (err) {
+    //     $("error").textContent = err.message;
+    //   } finally {
+    //     $("submit").disabled = false;
+    //   }
+    // });
+    async function removeSite(id) {
+      if (!confirm("Delete this monitored website and its history?")) return;
+      try {
+        await api("/sites/" + id, { method: "DELETE" });
+        lastRenderKey = "";
+        refresh();
+      } catch (e) {
+        alert(e.message);
+      }
+    }
+    async function checkSite(id) {
+      try {
+        await api("/sites/" + id + "/check", { method: "POST" });
+        lastRenderKey = "";
+        refresh();
+      } catch (e) {
+        alert(e.message);
+      }
+    }
+    async function toggleSite(id, enabled) {
+      try {
+        await api("/sites/" + id, { method: "PATCH", body: JSON.stringify({ enabled }) });
+        lastRenderKey = "";
+        refresh();
+      } catch (e) {
+        alert(e.message);
+      }
+    }
+    (async () => {
+      try {
+        const session = await api("/auth/session");
+        if (session.authenticated) {
+          hideLogin();
+          await refresh();
+        } else showLogin();
+      } catch {
+        showLogin();
+      }
+    })();
+    setInterval(() => {
+      if ($("loginScreen").style.display !== "grid") refresh();
+    }, 20000);
+  </script>
+
+</body>
+
+</html>
