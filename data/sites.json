@@ -1,0 +1,231 @@
+[
+  {
+    "id": "bc7c6653-f637-444d-ab2c-d05cab5bbd3a",
+    "name": "coachingmaster",
+    "url": "https://coachingmaster.in/",
+    "status": "up",
+    "responseTime": 204,
+    "statusCode": 200,
+    "lastChecked": "2026-11-16T13:39:42.912Z",
+    "history": [
+      {
+        "time": "2026-11-16T12:53:09.366Z",
+        "status": "up",
+        "responseTime": 194
+      },
+      {
+        "time": "2026-11-16T12:53:12.370Z",
+        "status": "up",
+        "responseTime": 52
+      },
+      {
+        "time": "2026-11-16T12:53:43.941Z",
+        "status": "up",
+        "responseTime": 102
+      },
+      {
+        "time": "2026-11-16T12:54:44.024Z",
+        "status": "up",
+        "responseTime": 181
+      },
+      {
+        "time": "2026-11-16T12:55:44.010Z",
+        "status": "up",
+        "responseTime": 154
+      },
+      {
+        "time": "2026-11-16T12:56:44.035Z",
+        "status": "up",
+        "responseTime": 173
+      },
+      {
+        "time": "2026-11-16T12:57:43.957Z",
+        "status": "up",
+        "responseTime": 89
+      },
+      {
+        "time": "2026-11-16T12:58:44.077Z",
+        "status": "up",
+        "responseTime": 207
+      },
+      {
+        "time": "2026-11-16T12:59:43.972Z",
+        "status": "up",
+        "responseTime": 100
+      },
+      {
+        "time": "2026-11-16T13:00:43.986Z",
+        "status": "up",
+        "responseTime": 108
+      },
+      {
+        "time": "2026-11-16T13:01:44.018Z",
+        "status": "up",
+        "responseTime": 133
+      },
+      {
+        "time": "2026-11-16T13:02:43.999Z",
+        "status": "up",
+        "responseTime": 110
+      },
+      {
+        "time": "2026-11-16T13:03:43.993Z",
+        "status": "up",
+        "responseTime": 105
+      },
+      {
+        "time": "2026-11-16T13:04:44.002Z",
+        "status": "up",
+        "responseTime": 107
+      },
+      {
+        "time": "2026-11-16T13:05:44.016Z",
+        "status": "up",
+        "responseTime": 107
+      },
+      {
+        "time": "2026-11-16T13:06:44.091Z",
+        "status": "up",
+        "responseTime": 181
+      },
+      {
+        "time": "2026-11-16T13:07:44.025Z",
+        "status": "up",
+        "responseTime": 108
+      },
+      {
+        "time": "2026-11-16T13:08:44.031Z",
+        "status": "up",
+        "responseTime": 105
+      },
+      {
+        "time": "2026-11-16T13:18:42.565Z",
+        "status": "down",
+        "responseTime": 9
+      },
+      {
+        "time": "2026-11-16T13:19:42.665Z",
+        "status": "up",
+        "responseTime": 108
+      },
+      {
+        "time": "2026-11-16T13:20:42.759Z",
+        "status": "up",
+        "responseTime": 202
+      },
+      {
+        "time": "2026-11-16T13:21:42.648Z",
+        "status": "up",
+        "responseTime": 91
+      },
+      {
+        "time": "2026-11-16T13:22:42.658Z",
+        "status": "up",
+        "responseTime": 99
+      },
+      {
+        "time": "2026-11-16T13:23:42.652Z",
+        "status": "up",
+        "responseTime": 84
+      },
+      {
+        "time": "2026-11-16T13:24:42.690Z",
+        "status": "up",
+        "responseTime": 115
+      },
+      {
+        "time": "2026-11-16T13:25:42.718Z",
+        "status": "up",
+        "responseTime": 130
+      },
+      {
+        "time": "2026-11-16T13:26:42.693Z",
+        "status": "up",
+        "responseTime": 105
+      },
+      {
+        "time": "2026-11-16T13:27:42.697Z",
+        "status": "up",
+        "responseTime": 107
+      },
+      {
+        "time": "2026-11-16T13:28:42.732Z",
+        "status": "up",
+        "responseTime": 143
+      },
+      {
+        "time": "2026-11-16T13:29:42.696Z",
+        "status": "up",
+        "responseTime": 94
+      },
+      {
+        "time": "2026-11-16T13:30:42.746Z",
+        "status": "up",
+        "responseTime": 141
+      },
+      {
+        "time": "2026-11-16T13:31:42.716Z",
+        "status": "up",
+        "responseTime": 107
+      },
+      {
+        "time": "2026-11-16T13:32:42.776Z",
+        "status": "up",
+        "responseTime": 167
+      },
+      {
+        "time": "2026-11-16T13:33:42.734Z",
+        "status": "up",
+        "responseTime": 111
+      },
+      {
+        "time": "2026-11-16T13:34:42.812Z",
+        "status": "up",
+        "responseTime": 175
+      },
+      {
+        "time": "2026-11-16T13:35:42.852Z",
+        "status": "up",
+        "responseTime": 203
+      },
+      {
+        "time": "2026-11-16T13:36:42.756Z",
+        "status": "up",
+        "responseTime": 91
+      },
+      {
+        "time": "2026-11-16T13:37:42.855Z",
+        "status": "up",
+        "responseTime": 177
+      },
+      {
+        "time": "2026-11-16T13:38:42.870Z",
+        "status": "up",
+        "responseTime": 177
+      },
+      {
+        "time": "2026-11-16T13:39:42.912Z",
+        "status": "up",
+        "responseTime": 204
+      }
+    ],
+    "incidents": [
+      {
+        "status": "up",
+        "time": "2026-11-16T13:19:42.665Z",
+        "message": "Website recovered"
+      },
+      {
+        "status": "down",
+        "time": "2026-11-16T13:18:42.565Z",
+        "message": "Website is unavailable"
+      },
+      {
+        "status": "up",
+        "time": "2026-11-16T12:53:09.366Z",
+        "message": "Website recovered"
+      }
+    ],
+    "error": null
+  }
+]
